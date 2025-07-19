@@ -29,10 +29,10 @@ def mask_func(value):
     upper_red = np.asarray([max_red, 255, 255])  # yellow! note the order
     # Threshold the HSV image to get only green colors
     mask = cv2.inRange(img_hsv, lower_red, upper_red)
-    
+
     kernel = np.ones((erosion, erosion), np.uint8)
     eroded = cv2.erode(mask, kernel)
-    dilated = cv2.dilate(eroded, kernel)  
+    dilated = cv2.dilate(eroded, kernel)
     # Bitwise-AND mask and original image
     res = cv2.bitwise_and(frame, frame, mask=dilated)
     contours, hierarchy = cv2.findContours(dilated, 1, cv2.CHAIN_APPROX_NONE)
@@ -62,7 +62,7 @@ vid = cv2.VideoCapture(0)
 green = np.uint8([[[0,255,0 ]]])
 red = np.uint8([[[0,0,255]]])
 
-while (True): 
+while (True):
     ret, frame = vid.read()
     picam2.start()
     frame = picam2.capture_array()
@@ -78,4 +78,4 @@ while (True):
 # After the loop release the cap object
 vid.release()
 # Destroy all the windows
-cv2.destroyAllWindows() 
+cv2.destroyAllWindows()
